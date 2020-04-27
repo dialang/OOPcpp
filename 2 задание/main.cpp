@@ -1,6 +1,7 @@
 
 
 #include <iostream>
+#include <sstream>
 #include <cstring>
 #include <stdlib.h>
 #include "container.h"
@@ -12,7 +13,10 @@ using namespace std;
 
 Container <Shape*> Collection;
 
-#define RAND100  rand()%101
+ //макросы это зло; или пишите везде rand()%101, или сделайте функцию.
+//Заменила на функцию
+int RAND(int n=100){ return   rand()%(n+1); }
+
 
 int SelectItem(int n)
 {
@@ -80,20 +84,20 @@ void AddFigure(void )
 		switch(item)
 		{
 			case 1: 
-					x=RAND100; y=RAND100;
+					x=RAND(); y=RAND();
 					pShape = new Point(x,y); 
-					cout << *pShape;
+				
 					break;
 			case 2: 
-					x=RAND100; y=RAND100; rad=RAND100;
+					x=RAND(); y=RAND(); rad=RAND();
 					pShape=new Circle(x,y,rad);  break;
 			
 			case 3:  
-					x=RAND100; y=RAND100; w=RAND100;h=RAND100;
+					x=RAND(); y=RAND(); w=RAND();h=RAND();
 					pShape=new Rect(x,y,x+w,y+h);break;
 			
 			case 4: 
-					x=RAND100; y=RAND100; w=RAND100;
+					x=RAND(); y=RAND(); w=RAND();
 					 pShape=new Square(0,0,w);
 					 break;
 			
@@ -101,7 +105,7 @@ void AddFigure(void )
 					ppoly=new Polyline(); 
 					n=2+rand()%10;
 					for(int i=0 ; i < n ; i++ )
-					{ x=RAND100; y=RAND100; ppoly->AddPoint(Point(x,y)); }
+					{ x=RAND(); y=RAND(); ppoly->AddPoint(Point(x,y)); }
 					pShape=ppoly; 
 					break; 
 					
@@ -109,7 +113,7 @@ void AddFigure(void )
 					ppgn = new Polygon();
 					n=3+rand()%10;
 					for(int i=0; i<n; i++ )
-					{ x=RAND100; y=RAND100; ppgn->AddPoint(Point(x,y));}
+					{ x=RAND(); y=RAND(); ppgn->AddPoint(Point(x,y));}
 					pShape=ppgn;
 					break;
 			default:cout << "Ошибка программы."<< endl; return;
