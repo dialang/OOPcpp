@@ -23,7 +23,7 @@ protected:
 protected:
 	T  *m_data;    
 	int m_last;    
-	int m_size;    
+	unsigned int m_size;
 	int m_inc_sz;  
 
 };
@@ -44,7 +44,7 @@ Container<T>::Container()
 template <typename T> 
 Container<T>::Container( int c )
 {
-	if( c < 0 ) c = 0; 
+	//if( c < 0 ) c = 0; 
 	
 	m_data = new T[ c ](); 	
 	m_last = c-1;			
@@ -75,7 +75,7 @@ Container <T>::~Container()
 
 
 template <typename T> 
-void Container <T>::pushBack( T data )
+void Container <T>::pushBack( T const &data)
 {
 	
 	if( ( m_last + 1 ) >= m_size )
@@ -102,15 +102,7 @@ template <typename T>
 T&  Container <T>::operator[] ( int index )
 {
 	
-	if( index < 0 || index > m_last ) 
-	{
-		std::string msg="Wrong index: ";
-		std::stringstream ss;
-		ss << index;
-		msg += ss.str();
-		throw msg; 
-	}
-	
+	if (index < 0 || index > m_last) throw std::runtime_error("Wrong index: " + std::to_string(index));
 	
  return m_data[ index ];
 }
