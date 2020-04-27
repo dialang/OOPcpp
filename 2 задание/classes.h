@@ -26,8 +26,8 @@ class Named: public virtual Printable
 {
 public:
 	Named();
-	Named(std::string const &name){m_name=name;} // Вопрос: а почему параметр -- С-строка? 
-protected:                                      // Исправлено на std::string
+	Named(std::string const &name){m_name=name;} // Р’РѕРїСЂРѕСЃ: Р° РїРѕС‡РµРјСѓ РїР°СЂР°РјРµС‚СЂ -- РЎ-СЃС‚СЂРѕРєР°?
+protected:                                      // РСЃРїСЂР°РІРёР»Р° РЅР° std::string
 	std::string m_name;
 
 };
@@ -39,8 +39,8 @@ class Shape : public virtual Printable
 public:
 	Shape()  { sm_Counter++; }
 	~Shape() { sm_Counter--; }
-	int GetCount(); // Ворос: вы в конце программы GetCount() выводили? Чё там было написано?
-			       // Число соданных экземпляров класса Shape в текущий момент времени
+	int GetCount(); // Р’РѕСЂРѕСЃ: РІС‹ РІ РєРѕРЅС†Рµ РїСЂРѕРіСЂР°РјРјС‹ GetCount() РІС‹РІРѕРґРёР»Рё? Р§С‘ С‚Р°Рј Р±С‹Р»Рѕ РЅР°РїРёСЃР°РЅРѕ?
+		       // Р§РёСЃР»Рѕ СЃРѕРґР°РЅРЅС‹С… СЌРєР·РµРјРїР»СЏСЂРѕРІ РєР»Р°СЃСЃР° Shape РІ С‚РµРєСѓС‰РёР№ РјРѕРјРµРЅС‚ РІСЂРµРјРµРЅРё
 protected:
 	static int sm_Counter;
 };
@@ -59,19 +59,19 @@ public:
 //	Point(float x,float y):Named("POINT"),Shape(){X=x;Y=y;}
 	Point(float x,float y):Named(sm_stat_name + std::to_string(GetCount())){X=x;Y=y;}
    
-    //Вопрос: Shape() писать разве обязательно? а можно сделать так,чтобы у каждого экземпляра точки было своё персональное имя? 
-  //добавляем уникальный номер экземпляра класса Shape
-
+   //Р’РѕРїСЂРѕСЃ: Shape() РїРёСЃР°С‚СЊ СЂР°Р·РІРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ? Р° РјРѕР¶РЅРѕ СЃРґРµР»Р°С‚СЊ С‚Р°Рє,С‡С‚РѕР±С‹ Сѓ РєР°Р¶РґРѕРіРѕ СЌРєР·РµРјРїР»СЏСЂР° С‚РѕС‡РєРё Р±С‹Р»Рѕ СЃРІРѕС‘ РїРµСЂСЃРѕРЅР°Р»СЊРЅРѕРµ РёРјСЏ? 
+  //РґРѕР±Р°РІР»СЏРµРј СѓРЅРёРєР°Р»СЊРЅС‹Р№ РЅРѕРјРµСЂ СЌРєР·РµРјРїР»СЏСЂР° РєР»Р°СЃСЃР° Shape
+  
  	virtual std::string ToString(); 
  	float x(){	return X;	 }
  	float y(){	return Y;	}
- 	float distance(Point &p); //"distance" please - исправлено
+ 	float distance(Point &p); //"distance" please - РёСЃРїСЂР°РІР»РµРЅРѕ
 	friend Point operator-(Point const &p1, Point  const &p2);
 protected:
 	float X,Y;
 };
 
- std::string Point::sm_stat_name="POINT";// стандартный префикс имени точки
+ std::string Point::sm_stat_name="POINT";// СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РїСЂРµС„РёРєСЃ РёРјРµРЅРё С‚РѕС‡РєРё
  
 std::string Point::ToString()
 { 
@@ -167,7 +167,7 @@ std::string Square::ToString()
 	std::stringstream ss;
    	ss << m_name <<'('<<'('<<leftbottom.x()<<','<<leftbottom.y()<<')';
         ss << ','<< width <<",Perimetr:"<<Perimetr()<< ",Area:"<< Area() << ')'; 
-//плохо делать длинные строки - исправлено 
+//РїР»РѕС…Рѕ РґРµР»Р°С‚СЊ РґР»РёРЅРЅС‹Рµ СЃС‚СЂРѕРєРё - РёСЃРїСЂР°РІР»РµРЅРѕ
    	return ss.str();
 }
 
