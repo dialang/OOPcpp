@@ -14,10 +14,13 @@ Container <int> vectInteger;
 Container <string> vectStr; 		
 system("chcp 1251");
 
+std::string s1="123";
+std::string s2="456";
+std::string s3="789";
 
-vectStr.pushBack(std::string("123"));
-vectStr.pushBack(std::string("456"));
-vectStr.pushBack(std::string("789"));
+vectStr.pushBack(s1);
+vectStr.pushBack(s2);
+vectStr.pushBack(s3);
 
 
 try
