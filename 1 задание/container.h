@@ -1,16 +1,18 @@
 #include <iostream>
 #include <sstream>
-
+#include <stdexcept>
+	
 
 template <typename T> 
 class Container
 {
 public:
 	Container(); 				
-	Container ( int ); 			
+	Container ( unsigned int ); 			
 	Container( Container const & src); 
 	~Container();				
-	void pushBack(T); 			
+	void pushBack(const T&); 	
+			
 	void popBack();       		
 	T& operator[] ( int i );	
 	int lenght();     			
@@ -21,8 +23,8 @@ protected:
 protected:
 	T  *m_data;    
 	int m_last;    
-	int m_size;    
-	int m_inc_sz;  
+	unsigned int m_size;    //¬опрос: размер же не бывает отрицательным?
+	int m_inc_sz;          // «аменила на беззнаковое значение
 
 };
 
@@ -39,9 +41,9 @@ Container<T>::Container()
 
 
 template <typename T> 
-Container<T>::Container( int c )
+Container<T>::Container( unsigned int c )
 {
-	if( c < 0 ) c = 0; 
+//	if( c < 0 ) c = 0; //зачем разрешать передавать отрицательные числа, а потом боротьс€ с этим? Ћучше не разрешать.
 	
 	m_data = new T[ c ](); 	
 	m_last = c-1;			
@@ -57,7 +59,8 @@ Container <T>::Container( Container const & src )
 	m_data = new T[ m_size ]; 
 	
 	
-    for( int i=0 ; i < m_size ; i++ ) m_data[ i ] = src.m_data[ i ];
+    for( int i=0 ; i < m_size ; i++ ) 
+		m_data[ i ] = src.m_data[ i ];
         
 	m_last = m_size - 1; 
 }
@@ -72,7 +75,8 @@ Container <T>::~Container()
 
 
 template <typename T> 
-void Container <T>::pushBack( T data )
+void Container <T>::pushBack( T const &data ) //вы делаете лишнее копирование объекта при передаче его по значению
+					                         // «аменила параметр на ссылочный тип
 {
 	
 	if( ( m_last + 1 ) >= m_size )
@@ -99,15 +103,9 @@ template <typename T>
 T&  Container <T>::operator[] ( int index )
 {
 	
-	if( index < 0 || index > m_last ) 
-	{
-		std::string msg="Wrong index: ";
-		stringstream ss;
-		ss << index;
-		msg += ss.str();
-		throw msg; 
-	}
-	
+  //вредно бросать исключени€, которые не €вл€ютс€ наследниками std::exception if( index < 0 || index > m_last ) throw std::runtime_error("Wrong index: " + std::to_string(index));
+  //заменила
+  if( index < 0 || index > m_last ) throw std::runtime_error("Wrong index: " + std::to_string(index));
 	
  return m_data[ index ];
 }
