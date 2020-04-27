@@ -23,8 +23,8 @@ protected:
 protected:
 	T  *m_data;    
 	int m_last;    
-	unsigned int m_size;    //Вопрос: размер же не бывает отрицательным?
-	int m_inc_sz;          // Заменила на беззнаковое значение
+	unsigned int m_size;    //Р’РѕРїСЂРѕСЃ: СЂР°Р·РјРµСЂ Р¶Рµ РЅРµ Р±С‹РІР°РµС‚ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј?
+	int m_inc_sz;          // Р—Р°РјРµРЅРёР»Р° РЅР° Р±РµР·Р·РЅР°РєРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ
 
 };
 
@@ -43,7 +43,7 @@ Container<T>::Container()
 template <typename T> 
 Container<T>::Container( unsigned int c )
 {
-//	if( c < 0 ) c = 0; //зачем разрешать передавать отрицательные числа, а потом бороться с этим? Лучше не разрешать.
+//	if( c < 0 ) c = 0; //Р·Р°С‡РµРј СЂР°Р·СЂРµС€Р°С‚СЊ РїРµСЂРµРґР°РІР°С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рµ С‡РёСЃР»Р°, Р° РїРѕС‚РѕРј Р±РѕСЂРѕС‚СЊСЃСЏ СЃ СЌС‚РёРј? Р›СѓС‡С€Рµ РЅРµ СЂР°Р·СЂРµС€Р°С‚СЊ.
 	
 	m_data = new T[ c ](); 	
 	m_last = c-1;			
@@ -75,8 +75,8 @@ Container <T>::~Container()
 
 
 template <typename T> 
-void Container <T>::pushBack( T const &data ) //вы делаете лишнее копирование объекта при передаче его по значению
-					                         // Заменила параметр на ссылочный тип
+void Container <T>::pushBack( T const &data ) //РІС‹ РґРµР»Р°РµС‚Рµ Р»РёС€РЅРµРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р° РїСЂРё РїРµСЂРµРґР°С‡Рµ РµРіРѕ РїРѕ Р·РЅР°С‡РµРЅРёСЋ
+					                         // Р—Р°РјРµРЅРёР»Р° РїР°СЂР°РјРµС‚СЂ РЅР° СЃСЃС‹Р»РѕС‡РЅС‹Р№ С‚РёРї
 {
 	
 	if( ( m_last + 1 ) >= m_size )
@@ -103,8 +103,8 @@ template <typename T>
 T&  Container <T>::operator[] ( int index )
 {
 	
-  //вредно бросать исключения, которые не являются наследниками std::exception if( index < 0 || index > m_last ) throw std::runtime_error("Wrong index: " + std::to_string(index));
-  //заменила
+  //РІСЂРµРґРЅРѕ Р±СЂРѕСЃР°С‚СЊ РёСЃРєР»СЋС‡РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ РЅР°СЃР»РµРґРЅРёРєР°РјРё std::exception if( index < 0 || index > m_last ) throw std::runtime_error("Wrong index: " + std::to_string(index));
+  //Р·Р°РјРµРЅРёР»Р°
   if( index < 0 || index > m_last ) throw std::runtime_error("Wrong index: " + std::to_string(index));
 	
  return m_data[ index ];
