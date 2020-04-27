@@ -26,8 +26,8 @@ class Named: public virtual Printable
 {
 public:
 	Named();
-	Named(char const *name){m_name=name;}
-protected:
+	Named(std::string const &name){m_name=name;} // Вопрос: а почему параметр -- С-строка? 
+protected:                                      // Исправлено на std::string
 	std::string m_name;
 
 };
@@ -39,7 +39,8 @@ class Shape : public virtual Printable
 public:
 	Shape()  { sm_Counter++; }
 	~Shape() { sm_Counter--; }
-	int GetCount();
+	int GetCount(); // Ворос: вы в конце программы GetCount() выводили? Чё там было написано?
+			       // Число соданных экземпляров класса Shape в текущий момент времени
 protected:
 	static int sm_Counter;
 };
@@ -51,19 +52,27 @@ int Shape::sm_Counter=0;
 
 class Point : public Shape,public Named
 {
+ static std::string sm_stat_name;
 
 public:
-	Point():Named("POINT"),Shape(){X=Y=0;}
-	Point(float x,float y):Named("POINT"),Shape(){X=x;Y=y;}
+	Point():Named(sm_stat_name + std::to_string(GetCount())){X=Y=0;}
+//	Point(float x,float y):Named("POINT"),Shape(){X=x;Y=y;}
+	Point(float x,float y):Named(sm_stat_name + std::to_string(GetCount())){X=x;Y=y;}
+   
+    //Вопрос: Shape() писать разве обязательно? а можно сделать так,чтобы у каждого экземпляра точки было своё персональное имя? 
+  //добавляем уникальный номер экземпляра класса Shape
+
  	virtual std::string ToString(); 
  	float x(){	return X;	 }
  	float y(){	return Y;	}
- 	float distan(Point &p);
+ 	float distance(Point &p); //"distance" please - исправлено
 	friend Point operator-(Point const &p1, Point  const &p2);
 protected:
 	float X,Y;
 };
 
+ std::string Point::sm_stat_name="POINT";// стандартный префикс имени точки
+ 
 std::string Point::ToString()
 { 
    std::stringstream ss;
@@ -71,7 +80,7 @@ std::string Point::ToString()
    return ss.str();
 }
 
-float Point::distan(Point  &p)
+float Point::distance(Point  &p)
 {
    float dx,dy;	
    dx=X-p.x();
@@ -156,7 +165,9 @@ protected:
 std::string Square::ToString()
 {
 	std::stringstream ss;
-   	ss << m_name <<'('<<'('<<leftbottom.x()<<','<<leftbottom.y()<<')'<<','<< width <<",Perimetr:"<<Perimetr()<< ",Area:"<< Area() << ')';
+   	ss << m_name <<'('<<'('<<leftbottom.x()<<','<<leftbottom.y()<<')';
+        ss << ','<< width <<",Perimetr:"<<Perimetr()<< ",Area:"<< Area() << ')'; 
+//плохо делать длинные строки - исправлено 
    	return ss.str();
 }
 
@@ -183,7 +194,7 @@ float Polyline::Length()
 	 {
 	 	p1=line[i];
 	 	p2=line[i+1];
-	        d += p1.distan(p2);
+	        d += p1.distance(p2);
 	 }
 	 
 	 }
@@ -257,7 +268,7 @@ float Polygon::Perimetr()
 	 {
 	 	p1=verts[i];
 	 	p2=verts[(i+1)%num];
-	    p += p1.distan(p2);
+	    p += p1.distance(p2);
 	 }
 	 
 	 }
