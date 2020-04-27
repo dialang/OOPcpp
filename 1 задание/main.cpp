@@ -26,7 +26,7 @@ vectStr.pushBack(s3);
 try
 {
 
-cout <<"Êîíòåéíåð ñòðîê:";
+cout <<"ÐšÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ ÑÑ‚Ñ€Ð¾Ðº:";
 
 for( int i = 0 ; i < vectStr.lenght() ; i++ )cout << vectStr[i]<<',';
 cout << endl;
@@ -40,7 +40,7 @@ double a=0.1;
 	  vectDouble[i] = a; a+=a;
 	}
 	
-	cout <<"Êîíòåéíåð âåù. ÷èñåë:";
+	cout <<"ÐšÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð²ÐµÑ‰. Ñ‡Ð¸ÑÐµÐ»:";
 	
 	for(int i=0;i< vectDouble.lenght(); i++) cout << vectDouble[i] << ' ';
  
@@ -59,7 +59,7 @@ double a=0.1;
 	vectInteger.pushBack(-3);
 	vectInteger.pushBack(-4);
 
-	cout <<"Êîíòåéíåð öåëûõ ÷èñåë:";
+	cout <<"ÐšÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ñ†ÐµÐ»Ñ‹Ñ… Ñ‡Ð¸ÑÐµÐ»:";
     
    	for(int i=0;i< vectInteger.lenght(); i++)  std::cout << vectInteger[i] << ' ';
 	cout << endl;
@@ -67,14 +67,14 @@ double a=0.1;
  	
 	Container <int> vectInteger2=vectInteger;
  
-    cout <<"Î÷èùåí êîíòåéíåð âåù. ÷èñåë" << endl;
+    cout <<"ÐžÑ‡Ð¸Ñ‰ÐµÐ½ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð²ÐµÑ‰. Ñ‡Ð¸ÑÐµÐ»"  << endl;
     
  	vectDouble.clear();
  
  	
- 	cout << "Ðàçìåð âåù. êîíòåéíåðà: " << vectDouble.lenght() << endl;
+ 	cout << "Ð Ð°Ð·Ð¼ÐµÑ€ Ð²ÐµÑ‰. ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ð°: " << vectDouble.lenght() << endl;
  	
- 	cout << "Ðàçìåð öåëîãî êîíòåéíåðà: " << vectInteger.lenght() << endl;
+ 	cout << "Ð Ð°Ð·Ð¼ÐµÑ€ Ñ†ÐµÐ»Ð¾Ð³Ð¾ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ð°: " << vectInteger.lenght() << endl;
  
  	cout << vectDouble[5] << endl; 
  
